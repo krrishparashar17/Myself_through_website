@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krrish Parashar - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #ff6b6b, #4ecdc4);
+            color: #2d3436;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 50px 20px;
+            background: rgba(255, 255, 255, 0.9);
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero h1 {
+            font-size: 3em;
+            color: #e74c3c;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .content-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .social-card {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            cursor: pointer;
+            min-height: 250px;
+        }
+
+        .social-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .social-card img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin-bottom: 10px;
+        }
+
+        .education {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .music-player {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .floating-menu {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .floating-btn {
+            background: #e74c3c;
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+
+        .floating-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .message-popup {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        audio {
+            width: 100%;
+            max-width: 400px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero">
+        <h1>Krrish Parashar</h1>
+        <p>Chandigarh University | CSE (AI & ML) | 2022-2027</p>
+    </div>
+
+    <div class="content-section">
+        <div class="education">
+            <h2>🎓 Education</h2>
+            <p>Chandigarh University</p>
+            <p>B.Tech Computer Science & Engineering</p>
+            <p>Specialization in AI & ML</p>
+            <p>Currently: 2nd Year (4th Sem)</p>
+            <p>Expected Graduation: 2027</p>
+        </div>
+
+        <div class="social-grid">
+            <div class="social-card" onclick="window.open('https://instagram.com/krrish_parashar')">
+                <img src="instagram-image.jpg" alt="Instagram">
+                <h3>Instagram</h3>
+                <p>@krrish_parashar</p>
+            </div>
+            
+            <div class="social-card" onclick="window.open('https://x.com/rebornviratian')">
+                <img src="twitter-image.jpg" alt="X">
+                <h3>Twitter/X</h3>
+                <p>@rebornviratian</p>
+            </div>
+
+            <div class="social-card" onclick="toggleMusic()">
+                <img src="music-image.jpg" alt="Music">
+                <h3>Favorite Song</h3>
+                <p>Popular (The Weeknd)</p>
+            </div>
+
+            <div class="social-card" onclick="showMessage()">
+                <img src="motivation-image.jpg" alt="Motivation">
+                <h3>Positive Vibes</h3>
+                <p>Click for motivation!</p>
+            </div>
+        </div>
+
+        
+
+<!-- Change only the music-player section to this: -->
+<div class="music-player" id="musicSection">
+    <h3>🎶 Currently Playing: Popular (The Weeknd)</h3>
+    <audio id="songPlayer" controls>
+        <source src="Popular(PagalNew.Com.Se).mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+</div>
+
+    <div class="floating-menu">
+        <button class="floating-btn" onclick="scrollToTop()">↑</button>
+        <button class="floating-btn" onclick="showSocial()">👤</button>
+        <button class="floating-btn" onclick="toggleMusic()">🎵</button>
+    </div>
+
+    <div class="message-popup" id="messageBox">
+        <div id="messageContent"></div>
+        <button onclick="closeMessage()" style="margin-top: 10px;">Close</button>
+    </div>
+
+    <script>
+        const messages = [
+            "Future AI/ML Leader!",
+            "CU's Brightest Mind!",
+            "Tech Visionary!",
+            "Relentless Learner!",
+            "Class of 2027 Star!",
+            "Next-Gen Innovator!",
+            "Code Champion!",
+            "AI Enthusiast!",
+            "Problem Solving Pro!",
+            "The Future is Yours!"
+        ];
+
+        const audioPlayer = document.getElementById('songPlayer');
+        let isPlaying = false;
+
+        function showMessage() {
+            const randomMessage = messages[Math.floor(Math.random() * messages.length)];
+            document.getElementById('messageContent').innerHTML = randomMessage;
+            document.getElementById('messageBox').style.display = 'block';
+        }
+
+        function closeMessage() {
+            document.getElementById('messageBox').style.display = 'none';
+        }
+
+        function toggleMusic() {
+            if(isPlaying) {
+                audioPlayer.pause();
+            } else {
+                audioPlayer.play();
+            }
+            isPlaying = !isPlaying;
+            document.getElementById('musicSection').scrollIntoView({behavior: 'smooth'});
+        }
+
+        function scrollToTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        function showSocial() {
+            window.open('https://instagram.com/krrish_parashar', '_blank');
+        }
+    </script>
+</body>
+</html>
